@@ -24,13 +24,13 @@ public class CategoryReponsitory implements ICategoryReponsitory {
     @Override
     public Category getCategoryById(int id) {
         try (Session session = HibernateUtils.openSession()){
-            Query<Category> query = session.createQuery("from Category where id = :id", Category.class);
+            Query<Category> query = session.createQuery("from Category where categoryId = :id", Category.class);
             query.setParameter("id", id);
+            return query.uniqueResult();
         } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
-        return getCategoryById(id);
     }
 
     @Override
